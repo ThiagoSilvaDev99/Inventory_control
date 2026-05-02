@@ -1,0 +1,20 @@
+#spring.application.name=TjnCompany
+
+spring:
+  application:
+    name: TjnCompany
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+  datasource:
+    url: ${URL_DB:jdbc:postgresql://localhost:5432/postgres?currentSchema=public}
+    username: ${USERNAME_DB:admin}
+    password: ${PASSWORD_DB:admin}
+    driverClassName: org.postgresql.Driver
+
+server:
+  port: 8080
