@@ -42,13 +42,13 @@ public class CategoryController {
         return ResponseEntity.created(location).body(newCategory);
     }
 
-    @PatchMapping("/{id}")
+    @PatchMapping("/{id}/name")
     public ResponseEntity<CategoryResponseDTO> changeName(@PathVariable UUID id, @RequestBody @Valid CategoryUpdateNameDTO dto){
         CategoryResponseDTO updatedCategory = categoryService.updateName(id, dto);
         return ResponseEntity.ok(updatedCategory);
     }
 
-    @PatchMapping("/{id}")
+    @PatchMapping("/{id}/parent")
     public ResponseEntity<CategoryResponseDTO> changeParent(@PathVariable UUID id, @RequestBody CategoryUpdateParentDTO dto){
         CategoryResponseDTO updatedCategory = categoryService.changeParent(id, dto);
         return ResponseEntity.ok(updatedCategory);

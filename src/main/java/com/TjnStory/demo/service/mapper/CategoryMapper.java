@@ -4,6 +4,8 @@ import com.TjnStory.demo.DTO.CategoryResponseDTO;
 import com.TjnStory.demo.entities.Category;
 import org.springframework.stereotype.Component;
 
+import java.util.UUID;
+
 @Component
 public class CategoryMapper {
 
@@ -12,6 +14,9 @@ public class CategoryMapper {
     }
 
     public CategoryResponseDTO convertToDTO(Category category) {
-        return new CategoryResponseDTO(category.getId(), category.getName(), category.getParent().getId());
+
+        UUID parentId = category.getParent() != null ? category.getParent().getId() : null;
+
+        return new CategoryResponseDTO(category.getId(), category.getName(), parentId);
     }
 }
