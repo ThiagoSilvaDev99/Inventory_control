@@ -51,7 +51,7 @@ public class CategoryService {
             parent = findCategoryById(dto.parentId());
         }
 
-        Category newCategory = mapper.convertToEntity(dto.name(), parent);
+        Category newCategory = mapper.convertToEntity(dto, parent);
         Category savedCategory = categoryRepository.save(newCategory);
         return mapper.convertToDTO(savedCategory);
 

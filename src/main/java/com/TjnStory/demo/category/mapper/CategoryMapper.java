@@ -1,22 +1,26 @@
 package com.TjnStory.demo.category.mapper;
 
+import com.TjnStory.demo.category.dto.CategoryCreateDTO;
 import com.TjnStory.demo.category.dto.CategoryResponseDTO;
 import com.TjnStory.demo.category.entity.Category;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
-@Component
-public class CategoryMapper {
+@Mapper(componentModel = "spring")
+public interface CategoryMapper {
 
-    public Category convertToEntity(String name, Category parent){
-        return Category.createCategory(name, parent);
+    default Category convertToEntity(CategoryCreateDTO dto, Category parent){
+
+        if (dto == null) {
+            return null;
+        }
+
+        return Category.createCategory(dto.name(), parent);
     }
 
-    public CategoryResponseDTO convertToDTO(Category category) {
-
-        UUID parentId = category.getParent() != null ? category.getParent().getId() : null;
-
-        return new CategoryResponseDTO(category.getId(), category.getName(), parentId);
-    }
+    @Mapping(source = "parent.id", target = "parent")
+    CategoryResponseDTO convertToDTO(Category category);
 }

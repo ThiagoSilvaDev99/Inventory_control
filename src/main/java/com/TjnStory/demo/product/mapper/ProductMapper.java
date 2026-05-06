@@ -1,35 +1,23 @@
 package com.TjnStory.demo.product.mapper;
 
-import com.TjnStory.demo.category.dto.CategoryResponseDTO;
 import com.TjnStory.demo.category.entity.Category;
+import com.TjnStory.demo.category.mapper.CategoryMapper;
 import com.TjnStory.demo.product.dto.ProductCreateDTO;
 import com.TjnStory.demo.product.dto.ProductResponseDTO;
 import com.TjnStory.demo.product.entity.Product;
-import org.springframework.stereotype.Component;
+import org.mapstruct.Mapper;
 
-import java.util.UUID;
+@Mapper(componentModel = "spring", uses = {CategoryMapper.class})
+public interface ProductMapper {
 
-@Component
-public class ProductMapper {
+     default Product convertToEntity(ProductCreateDTO dto, Category category) {
 
-    public Product convertToEntity(ProductCreateDTO dto, Category category) {
+         if (dto == null) {
+             return null;
+         }
 
         return Product.create(dto.name(), category, dto.costPrice(), dto.price(), dto.stockQuantity());
     }
 
-    public ProductResponseDTO convertToDTO(Product product) {
-
-        UUID parentId = null;
-        if (product.getCategory().getParent() != null) {
-            parentId = product.getCategory().getParent().getId();
-        }
-
-        CategoryResponseDTO categoryDTO = new CategoryResponseDTO(
-                product.getCategory().getId(),
-                product.getCategory().getName(),
-                parentId
-        );
-
-        return new ProductResponseDTO(product.getId(), product.getName(), product.getPrice(), product.getStockQuantity(), categoryDTO);
-    }
+    ProductResponseDTO convertToDTO(Product entity);
 }

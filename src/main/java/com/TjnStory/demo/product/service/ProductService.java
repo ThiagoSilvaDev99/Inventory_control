@@ -52,8 +52,8 @@ public class ProductService {
         }
 
         Product newProduct = mapper.convertToEntity(dto, category);
-        Product saveProduct = productRepository.save(newProduct);
-        return mapper.convertToDTO(saveProduct);
+        newProduct = productRepository.save(newProduct);
+        return mapper.convertToDTO(newProduct);
 
     }
 
