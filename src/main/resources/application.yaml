@@ -1,8 +1,8 @@
-#spring.application.name=TjnCompany
+#spring.application.name=EcommerceAPI
 
 spring:
   application:
-    name: TjnCompany
+    name: EcommerceAPI
 
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
@@ -11,7 +11,7 @@ spring:
       ddl-auto: update
 
   datasource:
-    url: ${URL_DB:jdbc:postgresql://localhost:5432/postgres?currentSchema=public}
+    url: ${URL_DB:jdbc:postgresql://localhost:5432/ecommerce_db?currentSchema=public}
     username: ${USERNAME_DB:admin}
     password: ${PASSWORD_DB:admin}
     driverClassName: org.postgresql.Driver
